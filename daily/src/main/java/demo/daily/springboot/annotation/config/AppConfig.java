@@ -1,7 +1,10 @@
 package demo.daily.springboot.annotation.config;
 
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
-@Confi
+@Configuration
+@ComponentScan("demo.daily.springboot.annotation")
 public class AppConfig {
 
 }
