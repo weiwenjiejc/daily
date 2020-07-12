@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ page contentType="text/html; charset=utf-8" language="java"%>
 <%@page import="com.dareway.framework.util.SessionUtil"%>
@@ -27,9 +27,9 @@
 		<nf:textInput dataType="date" name="releasedate" labelValue="发布时间"
 			<nf:textInput dataType="string" name="providerName" labelValue="提供方单位名称"
 			readonly="true"></nf:textInput>
-		<nf:dropdown name="purpose" labelValue="业务领域"
+			<nf:dropdown name="purpose" labelValue="业务领域"
 			code="YWLY" readonly="true"></nf:dropdown>
-		<nf:textInput dataType="date" name="newlydate" labelValue="新增时间"
+			<nf:textInput dataType="date" name="newlydate" labelValue="新增时间"
 			mask="yyyy-MM-dd hh:mm:ss" readonly="true"></nf:textInput>
 			mask="yyyy-MM-dd hh:mm:ss" readonly="true"></nf:textInput>
 		<nf:multiLineText name="remarks" labelValue="服务描述" readonly="true"
@@ -44,56 +44,50 @@
 	<nf:form name="queryForm" colCount="6" marginRight="50">
 		<nf:formTitle value="操作信息"></nf:formTitle>
 		<nf:textInput dataType="string" name="opbh" labelValue="操作名"
-			 colspan="2"></nf:textInput>
-			 
-		<nf:dropdown name="isactive" labelValue="状态"
-			code="CZZT"></nf:dropdown>
-			
-			
-			
-			
-			
-			
-			
+			colspan="2"></nf:textInput>
+
+		<nf:dropdown name="isactive" labelValue="状态" code="CZZT"></nf:dropdown>
+
+
+
+
+
+
+
 		<!-- 新增 -->
-		<nf:nextLine/>
+		<nf:nextLine />
 		<nf:dropdown name="sharingMode" labelValue="共享方式" code="GXFS"></nf:dropdown>
 		<nf:dropdown name="dataUpdateRate" labelValue="源数据更新频率" code="YSJGXPL"></nf:dropdown>
 		<nf:dropdown name="dataRange" labelValue="数据范围" code="SJFW"></nf:dropdown>
-			
-			
-			
+
+
+
 		<nf:buttons align="right">
 			<nf:button value="查询" name="btnQuery" onclick="qeryoperation()"></nf:button>
 			<nf:button value="新增操作" name="btnAdd" onclick="btnAddServClicked()"></nf:button>
-			<nf:button value="还原操作" name="btnReduce" onclick="btnReduceOperClicked()"></nf:button>
+			<nf:button value="还原操作" name="btnReduce"
+				onclick="btnReduceOperClicked()"></nf:button>
 		</nf:buttons>
-		
-		
-		
+
+
+
 	</nf:form>
 	<dw:hLayout>
 		<dw:panel rightBorder="1000">
 			<ng:grid name="operGrid" dataSource="operresult"
 				onDblClickRow="btnModifiyOperation">
 				<ng:gridColumns
-				
-				
 					<ng:gridHyperlink name="operation" head="操作" bodyAlign="center"
-						value="维护" href="btnModifiyOperation()"></ng:gridHyperlink>
-				</ng:gridColumns>
+						value="维护" href="btnModifiyOperation()"></ng:gridHyperlink></ng:gridColumns>
 			</ng:grid>
 		</dw:panel>
 					widthConfig="opbh:152,opbhchin:142,optype:113,istrade:152,isactive:72,instruction:222,operation:50">
 					<ng:gridTextInput dataType="string" name="sermc" hidden="true"></ng:gridTextInput>
-					<ng:gridTextInput dataType="string" name="opbh" head="操作名"></ng:gridTextInput>
-					<ng:gridTextInput dataType="string" name="opbhchin" head="操作中文名"></ng:gridTextInput>
-					<ng:gridDropdown name="optype" head="操作类型"
-						code="CZLX"></ng:gridDropdown>
-					<ng:gridDropdown name="isactive" head="状态"
-						code="CZZT"
-						width="60"></ng:gridDropdown>
-					<ng:gridTextInput dataType="string" name="remarks" head="说明"></ng:gridTextInput>
+		<ng:gridTextInput dataType="string" name="opbh" head="操作名"></ng:gridTextInput>
+		<ng:gridTextInput dataType="string" name="opbhchin" head="操作中文名"></ng:gridTextInput>
+		<ng:gridDropdown name="optype" head="操作类型" code="CZLX"></ng:gridDropdown>
+		<ng:gridDropdown name="isactive" head="状态" code="CZZT" width="60"></ng:gridDropdown>
+		<ng:gridTextInput dataType="string" name="remarks" head="说明"></ng:gridTextInput>
 		<dw:panel width="40"></dw:panel>
 	</dw:hLayout>
 </dw:body>
