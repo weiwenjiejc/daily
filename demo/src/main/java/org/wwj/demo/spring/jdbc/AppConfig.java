@@ -4,6 +4,8 @@ package org.wwj.demo.spring.jdbc;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -17,6 +19,7 @@ import javax.sql.DataSource;
 
 @Configurable
 @ImportResource(locations = {"classpath:spring-jdbc.xml"})
+@ComponentScan(basePackages = "org.wwj.demo.spring.jdbc")
 public class AppConfig {
 
     @Bean("oracleJdbcTemplate")
