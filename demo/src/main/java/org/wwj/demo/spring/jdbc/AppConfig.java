@@ -2,7 +2,13 @@ package org.wwj.demo.spring.jdbc;
 
 
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+
+import javax.sql.DataSource;
 
 /**
  * @ImportResource
@@ -13,4 +19,20 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource(locations = {"classpath:spring-jdbc.xml"})
 public class AppConfig {
 
+    @Bean("oracleJdbcTemplate")
+    public JdbcTemplate jdbcTemplate(@Qualifier("oracleDataSource") DataSource dataSource){
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(dataSource);
+        return jdbcTemplate;
+
+    }
+
+    /*配置spring事务管理器*/
+    @Bean
+    public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier("oracleDataSource") DataSource dataSource){
+        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
+        transactionManager.setDataSource(dataSource);
+        return transactionManager;
+    }
 }
