@@ -30,8 +30,8 @@
 	</bean>
 
 	<!--配置dao -->
-	<bean id="demoDao" class="com.demo.dao.DemoDao">
+	<!--<bean id="demoDao" class="com.demo.dao.DemoDao">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
-	</bean>
+	</bean>-->
 
 </beans>
