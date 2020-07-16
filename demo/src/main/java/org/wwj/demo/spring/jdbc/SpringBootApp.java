@@ -6,7 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 
 @SpringBootApplication
-public class Main {
+public class SpringBootApp {
 
     public static void main(String[] args) {
 
