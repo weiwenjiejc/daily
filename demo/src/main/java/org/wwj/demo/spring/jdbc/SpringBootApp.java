@@ -4,6 +4,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 import java.util.Map;
@@ -29,6 +33,32 @@ public class SpringBootApp {
         for (Map<String, Object> objectMap : mapList) {
             System.out.println(objectMap);
         }
+
+        DataSourceTransactionManager transactionManager;
+        transactionManager = applicationContext.getBean(DataSourceTransactionManager.class);
+
+        //默认的事务属性
+        TransactionDefinition definition = new DefaultTransactionDefinition();
+        
+        TransactionStatus transactionStatus = null;
+        
+
+        try {
+
+            //开启事务
+            transactionStatus = transactionManager.getTransaction(definition);
+            
+            /*只想SQL语句*/
+            
+            //提交事务
+            transactionManager.commit(transactionStatus);
+            
+        } catch (Exception e){
+            //出现异常，事务回滚
+            transactionManager.rollback(transactionStatus);
+        }
+        
+
 
     }
 }
