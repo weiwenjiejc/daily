@@ -14,17 +14,18 @@ import java.util.Map;
 
 
 @SpringBootApplication
-
 public class SpringBootApp {
 
     public static void main(String[] args) {
 
         ApplicationContext applicationContext;
         applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        txTest(applicationContext);
 
-        /*JdbcTemplate jdbcTemplate = applicationContext.getBean(JdbcTemplate.class);
-        jdbcTemplate.execute("create table (uid integer )");*/
 
+    }
+
+    private static void jdbcQuery(ApplicationContext applicationContext) {
         JdbcTemplate oracleJdbcTemplate = applicationContext.getBean("oracleJdbcTemplate", JdbcTemplate.class);
         System.out.println(oracleJdbcTemplate);
 
@@ -34,35 +35,42 @@ public class SpringBootApp {
         for (Map<String, Object> objectMap : mapList) {
             System.out.println(objectMap);
         }
+    }
+
+    private static void txTest(ApplicationContext applicationContext) {
+
+        JdbcTemplate jdbcTemplate = applicationContext.getBean("mysqlJdbcTemplate", JdbcTemplate.class);
 
         DataSourceTransactionManager transactionManager;
         transactionManager = applicationContext.getBean(DataSourceTransactionManager.class);
 
         //默认的事务属性
         TransactionDefinition definition = new DefaultTransactionDefinition();
-        
+
         TransactionStatus transactionStatus = null;
-        
+
 
         try {
 
             //开启事务
             transactionStatus = transactionManager.getTransaction(definition);
-            
+
             /*执行SQL语句*/
             String dropTableSQL = getDropTableSQL();
             String createTableSQL = getCreateTableSQL();
-
+            int update = jdbcTemplate.update(dropTableSQL);
+            System.out.println(update);
+            int update1 = jdbcTemplate.update(getCreateTableSQL());
+            System.out.println(update1);
             //提交事务
             transactionManager.commit(transactionStatus);
-            
+
         } catch (Exception e){
             //出现异常，事务回滚
             transactionManager.rollback(transactionStatus);
+        }finally {
+            System.out.println("事务结束");
         }
-        
-
-
     }
 
     private static String getDropTableSQL(){
