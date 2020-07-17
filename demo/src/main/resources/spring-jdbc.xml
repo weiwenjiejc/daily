@@ -13,7 +13,7 @@
 		location="classpath:spring-jdbc.properties" />
 
 	<!--创建spring-jdbc内置数据源 -->
-	<bean id="dataSource"
+	<bean id="mysqlDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="com.mysql.cj.jdbc.Driver" />

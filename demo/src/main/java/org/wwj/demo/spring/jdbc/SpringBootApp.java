@@ -49,8 +49,10 @@ public class SpringBootApp {
             //开启事务
             transactionStatus = transactionManager.getTransaction(definition);
             
-            /*只想SQL语句*/
-            getCreateTableSQL();
+            /*执行SQL语句*/
+            String dropTableSQL = getDropTableSQL();
+            String createTableSQL = getCreateTableSQL();
+
             //提交事务
             transactionManager.commit(transactionStatus);
             
@@ -63,9 +65,18 @@ public class SpringBootApp {
 
     }
 
+    private static String getDropTableSQL(){
+        String sql = "drop table if exists account";
+        return sql;
+    }
     private static String getCreateTableSQL() {
 
         String sql = "create table account(" +
-                "aid int primary auto)"
+                "aid int(8) not null," +
+                "name varchar(25) not null," +
+                "money decimal(10,2) not null," +
+                "constraint pk1 primary key(aid)" +
+                ")";
+        return sql;
     }
 }

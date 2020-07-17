@@ -1,4 +1,4 @@
-package demo.daily.aop.annotation;
+package org.wwj.demo.aop;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

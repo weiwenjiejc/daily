@@ -31,6 +31,15 @@ public class AppConfig {
 
     }
 
+    @Bean
+    public JdbcTemplate mysqlJdbcTemplate(@Qualifier("mysqlDataSource") DataSource dataSource){
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(dataSource);
+        return jdbcTemplate;
+
+    }
+
     /*配置spring事务管理器*/
     @Bean
     public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier("oracleDataSource") DataSource dataSource){
