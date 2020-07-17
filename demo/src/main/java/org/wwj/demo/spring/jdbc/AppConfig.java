@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
@@ -18,6 +19,7 @@ import javax.sql.DataSource;
  */
 
 @Configurable
+@EnableTransactionManagement
 @ImportResource(locations = {"classpath:spring-jdbc.xml"})
 @ComponentScan(basePackages = "org.wwj.demo.spring.jdbc")
 public class AppConfig {
@@ -41,8 +43,17 @@ public class AppConfig {
     }
 
     /*配置spring事务管理器*/
-    @Bean
+    //不知为什么有两个事务管理器，就会出错，不能成功自动注入
+    /*@Bean
     public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier("oracleDataSource") DataSource dataSource){
+        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
+        transactionManager.setDataSource(dataSource);
+        return transactionManager;
+    }*/
+
+    //@Bean("transactionManager1")
+    @Bean
+    public DataSourceTransactionManager transactionManager(@Qualifier("mysqlDataSource") DataSource dataSource){
         DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
         transactionManager.setDataSource(dataSource);
         return transactionManager;
