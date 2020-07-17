@@ -50,7 +50,7 @@ public class SpringBootApp {
             transactionStatus = transactionManager.getTransaction(definition);
             
             /*只想SQL语句*/
-            
+            getCreateTableSQL();
             //提交事务
             transactionManager.commit(transactionStatus);
             
@@ -61,5 +61,11 @@ public class SpringBootApp {
         
 
 
+    }
+
+    private static String getCreateTableSQL() {
+
+        String sql = "create table account(" +
+                "aid int primary auto)"
     }
 }
