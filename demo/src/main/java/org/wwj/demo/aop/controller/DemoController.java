@@ -1,4 +1,4 @@
-package demo.daily.aop.annotation.controller;
+package org.wwj.demo.aop.controller;
 
 import org.springframework.stereotype.Controller;
 

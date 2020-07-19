@@ -2,13 +2,35 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans.xsd 
        http://www.springframework.org/schema/context 
-       https://www.springframework.org/schema/context/spring-context.xsd">
+       https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    
-    <context:component-scan base-package="org.wwj.demo"></context:component-scan>
-    
-    
+    <!--开启注解-->
+    <context:annotation-config></context:annotation-config>
+
+    <!--注解扫描范围-->
+    <context:component-scan base-package="org.wwj.demo.aop"></context:component-scan>
+
+
+    <!--切面类，可以把此类中的函数切入到其他类的函数前后-->
+    <bean id="qiemian" class="org.wwj.demo.aop.aspect.DemoAspect"></bean>
+
+    <aop:config>
+        <!--定义切面，包括通知和切点-->
+        <aop:aspect ref="qiemian">
+            <!--定义切点-->
+            <aop:pointcut id="pt1" expression="execution(* org.wwj.demo.aop.service.AopDemoServiceImpl.fun1())"/>
+            <!--定义通知-->
+            <aop:before method="before" pointcut-ref="pt1"/>
+            <aop:around method="around" pointcut-ref="pt1"/>
+            <aop:after-returning method="afterReturning" pointcut-ref="pt1" />
+            <aop:after-throwing method="afterThrowing" pointcut-ref="pt1"/>
+            <aop:after method="after" pointcut-ref="pt1" />
+        </aop:aspect>
+        <!--定义通知器-->
+        <!--<aop:advisor advice-ref=""></aop:advisor>-->
+    </aop:config>
 </beans>

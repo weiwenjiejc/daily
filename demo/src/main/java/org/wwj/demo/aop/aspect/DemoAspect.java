@@ -1,5 +1,7 @@
-package demo.daily.aop.annotation.aspect;
+package org.wwj.demo.aop.aspect;
 
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +13,28 @@ import org.springframework.stereotype.Component;
  * @date 2020-7-10
  */
 
-@Aspect
-@Component
+/*@Aspect
+@Component*/
 public class DemoAspect {
 
+
+    void before(){
+        System.out.println("before");
+    }
+
+    public void around() {
+        System.out.println("around");
+    }
+
+    public void afterThrowing() {
+        System.out.println("afterThrowing");
+    }
+
+    public void after() {
+        System.out.println("after");
+    }
+
+    public void afterReturning() {
+        System.out.println("afterReturning");
+    }
 }
